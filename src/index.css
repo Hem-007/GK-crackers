@@ -1,0 +1,196 @@
+@import "tailwindcss";
+
+/* =====================================================
+   FESTIVE COLOR VARIABLES
+   Change brand colors here only
+   ===================================================== */
+:root {
+  --festive-bg: #fff7ed;
+  --festive-primary: #dc2626;
+  --festive-secondary: #f97316;
+  --festive-accent: #facc15;
+  --festive-heading: #1f2937;
+  --festive-body: #374151;
+}
+
+/* =====================================================
+   PRIMARY BUTTON (SAFE FOR TAILWIND v4)
+   ===================================================== */
+.btn-primary {
+  background-color: var(--festive-primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 10px 20px rgba(220, 38, 38, 0.25);
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+/* =====================================================
+   OUTLINE BUTTON
+   ===================================================== */
+.btn-outline {
+  background-color: white;
+  color: var(--festive-secondary);
+  border: 2px solid var(--festive-secondary);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+  background-color: var(--festive-secondary);
+  color: white;
+}
+
+/* =====================================================
+   GLOBAL ANIMATED FESTIVE BACKGROUND (ONE SOURCE OF TRUTH)
+   ===================================================== */
+body {
+  position: relative;
+  background: linear-gradient(
+    120deg,
+    #fff7ed,
+    #fde68a,
+    #fee2e2,
+    #fdbebe,
+    #fa9797
+  );
+  background-size: 400% 400%;
+  animation: festiveGradient 18s ease infinite;
+}
+
+/* Background animation */
+@keyframes festiveGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* =====================================================
+   FLOATING FESTIVE PARTICLES (BACKGROUND ONLY)
+   ===================================================== */
+.background-particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+/* =====================================================
+   BACKGROUND BUBBLES (DARKER & MORE VISIBLE)
+   ===================================================== */
+.background-particles span {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+
+  /* darker & colorful bubbles */
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0.45),
+    rgba(0, 0, 0, 0.15)
+  );
+
+  opacity: 0.6;
+  filter: blur(0.5px);
+
+  animation: floatParticles linear infinite;
+}
+
+
+/* Particle movement */
+@keyframes floatParticles {
+  from {
+    transform: translateY(100vh) scale(0.8);
+  }
+  to {
+    transform: translateY(-10vh) scale(1.2);
+  }
+}
+
+/* =====================================================
+   SECTION ENTRANCE ANIMATION
+   ===================================================== */
+.fade-up {
+  animation: fadeUp 0.8s ease forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =====================================================
+   TRANSPARENT SECTION (GLASS EFFECT)
+   Use this for all main sections
+   ===================================================== */
+.glass-section {
+  background: rgba(255, 255, 255, 0.25); /* transparent white */
+  
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* =====================================================
+   HIDE HORIZONTAL SCROLLBAR (CLEAN LOOK)
+   ===================================================== */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  15% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  85% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+.animate-fadeInOut {
+  animation: fadeInOut 3s ease-in-out;
+}
+
