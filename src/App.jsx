@@ -5,8 +5,8 @@ import Products from "./pages/Products";
 import Order from "./pages/Order";
 import Footer from "./components/Footer";
 import Cart from "./pages/Cart";
-import StickyCartBar from "./components/StickyCartBar";
 import WhatsAppFloat from "./components/WhatsAppFloat";
+import BackButton from "./components/BackButton";
 
 
 
@@ -36,6 +36,7 @@ function App() {
 
       <div className="min-h-screen bg-festive-bg">
         <Navbar />
+        <BackButton />
         <div className="w-full">
           <Routes>
             <Route path="/" element={<Home />} />

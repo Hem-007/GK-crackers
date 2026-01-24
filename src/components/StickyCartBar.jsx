@@ -25,7 +25,7 @@ function StickyCartBar() {
   return (
     <div
       className="
-        fixed bottom-0 left-0 right-0
+        fixed bottom-14 left-0 right-0
         z-50
         bg-white/90
         backdrop-blur-md

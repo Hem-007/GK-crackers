@@ -49,27 +49,33 @@ function Order() {
     0
   );
 
-  const handleOrder = (e) => {
+    const handleOrder = (e) => {
     e.preventDefault();
 
     const name = e.target.name.value;
     const phone = e.target.phone.value;
     const address = e.target.address.value;
 
-    let message = `New Order from EG Crackers%n%n`;
-    message += `Name: ${name}%nPhone: ${phone}%nAddress: ${address}%n%n`;
+    let message = ` New Order from EG Crackers\n\n`;
 
+    message += ` Name: ${name}\n`;
+    message += ` Phone: ${phone}\n`;
+    message += ` Address:\n${address}\n\n`;
+
+    message += ` Order Items:\n`;
     cartItems.forEach((item) => {
-      message += `${item.name} x ${item.qty} = ₹${item.price * item.qty}%n`;
+      message += `• ${item.name} × ${item.qty} = ₹${item.price * item.qty}\n`;
     });
 
-    message += `%nTotal: ₹${total}`;
+    message += `\n💰 Total: ₹${total}`;
 
-    window.open(
-      `https://wa.me/919940861382?text=${encodeURIComponent(message)}`,
-      "_blank"
-    );
+    const whatsappURL = `https://wa.me/918778737906?text=${encodeURIComponent(
+      message
+    )}`;
+
+    window.open(whatsappURL, "_blank");
   };
+
 
   return (
     <section className="w-full py-24 glass-section">

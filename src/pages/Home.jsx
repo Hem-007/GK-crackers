@@ -63,16 +63,6 @@ function Home() {
 
                 
 
-                {/* CTA
-                <div className="mt-4">
-                <a
-                    href="#categories"
-                    className="inline-block bg-red-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm"
-                >
-                    Shop Crackers
-                </a>
-                </div> */}
-
             </div>
         </section>
         <section className="px-4 py-4">

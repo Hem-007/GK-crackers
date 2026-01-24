@@ -23,7 +23,7 @@ function TrustMessage() {
         key={index}
         className="
             block
-            text-3xl sm:text-4xl lg:text-5xl
+            text-2xl sm:text-4xl lg:text-5xl
             font-bold
             bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600
             bg-clip-text text-transparent
