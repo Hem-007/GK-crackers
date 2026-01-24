@@ -1,103 +1,131 @@
+
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import BannerSlider from "../components/BannerSlider";
 import HorizontalProductSection from "../components/HorizontalProductSection";
 import categories from "../data/categories";
 import { bestSellers, limitedSales } from "../data/homeSections";
 import TrustMessage from "../components/TrustMessage";
 import StickyCartBar from "../components/StickyCartBar";
+import SearchBar from "../components/SearchBar";
+
 
 /*
 =====================================================
-HOME PAGE
-Sections order:
-1. Banner / Advertisement (AUTO SLIDER)
-2. Product Categories (image + horizontal scroll)
-3. Best Sellers (horizontal scroll)
-4. Limited Time Offers (horizontal scroll)
-5. Why Choose Us (final section)
+HOME PAGE (MOBILE-FIRST)
+Order:
+1. Banner
+2. Hero Text
+3. Categories
+4. Best Sellers
+5. Limited Offers
+6. Why Choose Us
 =====================================================
 */
 
 function Home() {
+    const [search, setSearch] = useState("");   
+    const navigate = useNavigate(); 
+    const handleSearch = () => {
+    if (!search.trim()) return;
+
+        navigate(`/products?search=${encodeURIComponent(search)}`);
+        };
+
   return (
     <main className="w-full">
 
-        {/* =====================================================
-            HERO TEXT SECTION
-            - Brand-focused heading
-            - Animated trust badge below
-            ===================================================== */}
-        <section className="w-full py-12 glass-section">
-        <div className="max-w-7xl mx-auto px-6">
+      {/* =====================================================
+    HERO SECTION (MOBILE-FIRST, FIXED)
+        ===================================================== */}
+        <section className="w-full bg-[#FFF7ED]">
+            <div className="max-w-7xl mx-auto px-4 pt-6 pb-4">
 
-            {/* Main heading */}
-            <h1 className="text-5xl md:text-6xl font-extrabold text-gray-800">
-            Celebrate with{" "}
-            <span className="text-red-600">EG Crackers</span>
-            </h1>
+                {/* Heading */}
+                <h1 className="text-2xl font-extrabold text-gray-800 leading-tight">
+                Celebrate with{" "}
+                <span className="text-red-600">EG Crackers</span>
+                </h1>
 
-            {/* Animated trust message */}
-            <div className="mt-5">
-            <TrustMessage />
+
+                {/* Description */}
+                <p className="mt-3 text-sm text-gray-700 max-w-xl">
+                Premium quality crackers for every celebration.
+                <span className="hidden sm:inline">
+                    {" "}Safe, reliable & joyful moments 🎆
+                </span>
+                </p>
+
+                {/* Trust message */}
+                <div className="mt-2">
+                <TrustMessage />
+                </div>
+
+                
+
+                {/* CTA
+                <div className="mt-4">
+                <a
+                    href="#categories"
+                    className="inline-block bg-red-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm"
+                >
+                    Shop Crackers
+                </a>
+                </div> */}
+
             </div>
-
-            {/* Description */}
-            <p className="mt-6 text-xl text-gray-700 leading-relaxed max-w-3xl">
-            Premium quality crackers and fireworks for every celebration.
-            <br />
-            Safe, reliable, and joyful moments guaranteed 🎆
-            </p>
-
-        </div>
+        </section>
+        <section className="px-4 py-4">
+            <SearchBar
+                value={search}
+                onChange={setSearch}
+                onEnter={handleSearch}
+                placeholder="Search crackers, sparklers…"
+                />
         </section>
 
 
+      
       {/* =====================================================
-          BANNER / ADVERTISEMENT SECTION (MISSING EARLIER)
-          - Auto sliding banners
-          - Full width
+          BANNER / ADVERTISEMENT SECTION
           ===================================================== */}
       <section className="w-full">
         <BannerSlider />
       </section>
 
+
       {/* =====================================================
           PRODUCT CATEGORIES SECTION
-          - Image + text
-          - 4 cards visible
-          - Horizontal scroll
           ===================================================== */}
-      <section className="w-full pt-3 pb-3 glass-section">
+      <section className="w-full sm:py-14 pt-3 pb-4  glass-section" id="categories">
+        <div className="max-w-7xl mx-auto">
 
-        {/* Content container */}
-        <div className="max-w-9xl mx-auto px-6">
-
-          {/* Section title */}
-          <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 text-center">
             Product Categories
           </h2>
 
-          {/* Scroll frame */}
           <div
             className="
               border border-white/40
               rounded-2xl
               bg-white/10
               backdrop-blur-md
-              p-4
+              p-3 sm:p-4
               overflow-x-auto
               scroll-smooth
               scrollbar-hide
             "
           >
-            {/* Horizontal row */}
-            <div className="flex gap-6 min-w-max">
+            <div className="flex gap-4 sm:gap-6 min-w-max "> 
 
               {categories.map((cat) => (
                 <a
                   key={cat.name}
                   href={`/products?category=${encodeURIComponent(cat.name)}`}
                   className="
-                    min-w-[260px]
+                    min-w-[200px]
+                    sm:min-w-[220px]
+                    md:min-w-[260px]
                     bg-white/85
                     backdrop-blur-sm
                     rounded-xl
@@ -106,18 +134,18 @@ function Home() {
                     transition-all duration-300
                     hover:-translate-y-1
                     hover:shadow-xl
+                    rounded-xl p-4  justify-center
                   "
+                  
                 >
-                  {/* Category image */}
                   <img
                     src={cat.image}
                     alt={cat.name}
-                    className="w-full h-40 object-cover"
+                    className="w-full h-32 sm:h-36 md:h-40 object-cover "
                   />
 
-                  {/* Category name */}
-                  <div className="p-4 text-center">
-                    <h3 className="font-semibold text-gray-800">
+                  <div className="p-3 sm:p-4 text-center">
+                    <h3 className="font-semibold text-gray-800 text-sm sm:text-base">
                       {cat.name}
                     </h3>
                   </div>
@@ -131,7 +159,7 @@ function Home() {
       </section>
 
       {/* =====================================================
-          BEST SELLERS SECTION
+          BEST SELLERS
           ===================================================== */}
       <HorizontalProductSection
         title="🔥 Best Sellers"
@@ -139,7 +167,7 @@ function Home() {
       />
 
       {/* =====================================================
-          LIMITED TIME OFFERS SECTION
+          LIMITED TIME OFFERS
           ===================================================== */}
       <HorizontalProductSection
         title="⏰ Limited Time Offers"
@@ -147,61 +175,62 @@ function Home() {
       />
 
       {/* =====================================================
-          WHY CHOOSE US SECTION
+          WHY CHOOSE US
           ===================================================== */}
-      <section className="w-full pt-3 pb-5 bg-gradient-to-r from-red-50 via-yellow-50 to-orange-50">
+      <section className="w-full py-12 sm:py-16 bg-gradient-to-r from-red-50 via-yellow-50 to-orange-50">
         <div className="max-w-7xl mx-auto px-6">
-            <h2 className="text-3xl font-bold text-gray-800 text-center">
-            Why Choose EG Crackers 🎆✨
-            </h2>
 
-            {/* Trust content */}
-            <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 text-center">
+            Why Choose EG Crackers 🎆✨
+          </h2>
+
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-                {
+              {
                 title: "Premium Quality ✅",
                 desc: "Certified and safe crackers only 🧨",
-                },
-                {
+              },
+              {
                 title: "Best Prices 💰",
                 desc: "Affordable rates for all families 👨‍👩‍👧‍👦",
-                },
-                {
+              },
+              {
                 title: "Wide Variety 🎉",
                 desc: "Kids, fancy & sound crackers 🎇",
-                },
-                {
+              },
+              {
                 title: "Trusted Seller 🤝",
                 desc: "Serving customers for years 🏆",
-                },
+              },
             ].map((item) => (
-                <div
+              <div
                 key={item.title}
                 className="
-                    bg-white/80
-                    backdrop-blur-sm
-                    rounded-xl
-                    p-6
-                    text-center
-                    shadow-sm
-                    transition-all duration-300
-                    hover:-translate-y-1
-                    hover:shadow-md
+                  bg-white/80
+                  backdrop-blur-sm
+                  rounded-xl
+                  p-5
+                  text-center
+                  shadow-sm
+                  transition-all duration-300
+                  hover:-translate-y-1
+                  hover:shadow-md
                 "
-                >
+              >
                 <h3 className="font-semibold text-gray-800">
-                    {item.title}
+                  {item.title}
                 </h3>
                 <p className="mt-2 text-sm text-gray-600">
-                    {item.desc}
+                  {item.desc}
                 </p>
-                </div>
+              </div>
             ))}
-            </div>
-        </div>
-        </section>
-        <StickyCartBar />
+          </div>
 
+        </div>
+      <StickyCartBar/>
+      </section>
+      
     </main>
   );
 }

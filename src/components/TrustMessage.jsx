@@ -18,7 +18,7 @@ function TrustMessage() {
   }, []);
 
   return (
-    <div className="absolute right-6 pointer-events-none">
+    <div className="abs right-6 pointer-events-none">
       <span
         key={index}
         className="

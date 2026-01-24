@@ -66,7 +66,7 @@ function Order() {
     message += `%nTotal: ₹${total}`;
 
     window.open(
-      `https://wa.me/9940861382?text=${encodeURIComponent(message)}`,
+      `https://wa.me/919940861382?text=${encodeURIComponent(message)}`,
       "_blank"
     );
   };

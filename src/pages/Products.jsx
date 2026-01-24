@@ -1,138 +1,175 @@
 import { useSearchParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import products from "../data/products";
 import categoryImageMap from "../data/categoryImageMap";
 import { useOrder } from "../context/OrderContext";
 import StickyCartBar from "../components/StickyCartBar";
+import SearchBar from "../components/SearchBar";
 
 /*
 =====================================================
 PRODUCTS PAGE
-- Category filter
-- URL-based filtering
+- URL-based category filtering
+- URL-based search filtering
+- Mobile-first layout
 - Add to Cart (+ / -)
 =====================================================
 */
 
 function Products() {
   const { cartItems, addToCart, increaseQty, decreaseQty } = useOrder();
-
-  // Read category from URL
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const searchQuery = searchParams.get("search") || "";
   const selectedCategory = searchParams.get("category");
 
-  // Quantity helper
+  const [search, setSearch] = useState(searchQuery);
+
+  // Sync search input when URL changes (Home → Products)
+  useEffect(() => {
+    setSearch(searchQuery);
+  }, [searchQuery]);
+
   const getQty = (id) =>
     cartItems.find((p) => p.id === id)?.qty || 0;
 
-  // Filtered products
-  const filteredProducts = selectedCategory
-    ? products.filter(
-        (p) => p.category === selectedCategory
-      )
-    : products;
+  const categories = [...new Set(products.map((p) => p.category))];
+
+  // Handle search change → update URL
+  const handleSearchChange = (value) => {
+    setSearch(value);
+
+    const params = {};
+    if (selectedCategory) params.category = selectedCategory;
+    if (value) params.search = value;
+
+    setSearchParams(params);
+  };
+
+  // Filter products (category + search)
+  const filteredProducts = products.filter((p) => {
+    const matchCategory = selectedCategory
+      ? p.category === selectedCategory
+      : true;
+
+    const matchSearch = search
+      ? p.name.toLowerCase().includes(search.toLowerCase())
+      : true;
+
+    return matchCategory && matchSearch;
+  });
 
   return (
-    <section className="w-full py-24 glass-section">
-      <div className="max-w-7xl mx-auto ">
+    <section className="w-full py-12 glass-section">
+      <div className="max-w-7xl mx-auto px-4 pb-24">
 
-        {/* Page title */}
-        <h1 className="text-3xl font-bold text-gray-800 mb-6">
-          Products
-        </h1>
+        {/* ==============================
+            PRODUCTS HEADER
+        ============================== */}
+        <div className="mb-6 space-y-4">
 
-        {/* ================================
-            CATEGORY FILTER DROPDOWN
-            ================================ */}
-        <div className="mb-10 max-w-xs">
-          <select
-            value={selectedCategory || ""}
-            onChange={(e) => {
-              const value = e.target.value;
-              if (value) {
-                setSearchParams({ category: value });
-              } else {
-                setSearchParams({});
-              }
-            }}
-            className="w-full p-3 rounded-lg border"
-          >
-            <option value="">All Categories</option>
+          {/* Search Bar */}
+          <SearchBar
+            value={search}
+            onChange={handleSearchChange}
+            placeholder="Search crackers…"
+          />
 
-            {[...new Set(products.map(p => p.category))].map(
-              (cat) => (
+          {/* Title + Category Filter */}
+          <div className="flex items-center justify-between gap-4">
+            <h1 className="text-2xl font-bold text-gray-800">
+              {selectedCategory || "All Products"}
+            </h1>
+
+            <select
+              value={selectedCategory || ""}
+              onChange={(e) => {
+                const value = e.target.value;
+                const params = {};
+                if (value) params.category = value;
+                if (search) params.search = search;
+                setSearchParams(params);
+              }}
+              className="
+                h-11
+                px-4
+                rounded-xl
+                border
+                border-gray-300
+                bg-white
+                text-sm
+                focus:outline-none
+              "
+            >
+              <option value="">All</option>
+              {categories.map((cat) => (
                 <option key={cat} value={cat}>
                   {cat}
                 </option>
-              )
-            )}
-          </select>
+              ))}
+            </select>
+          </div>
         </div>
 
-        {/* ================================
+        {/* ==============================
             PRODUCTS GRID
-            ================================ */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-
+        ============================== */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProducts.map((product) => {
             const qty = getQty(product.id);
 
             return (
               <div
                 key={product.id}
-                className="
-                  bg-white/85
-                  backdrop-blur-sm
-                  rounded-xl
-                  shadow-md
-                  overflow-hidden
-                "
+                className="bg-white rounded-2xl shadow-sm p-3"
               >
-                {/* Product image */}
-                <img
-                  src={categoryImageMap[product.category]}
-                  alt={product.name}
-                  className="w-full h-44 object-cover"
-                />
+                {/* Image */}
+                <div className="bg-gray-50 rounded-xl p-4 flex items-center justify-center">
+                  <img
+                    src={categoryImageMap[product.category]}
+                    alt={product.name}
+                    className="h-40 object-contain"
+                  />
+                </div>
 
-                <div className="p-5">
-                  <h3 className="font-semibold text-gray-800">
+                {/* Info */}
+                <div className="mt-3">
+                  <h3 className="font-medium text-gray-800 text-sm">
                     {product.name}
                   </h3>
 
-                  <p className="text-sm text-gray-500 mt-1">
+                  <p className="text-xs text-gray-500 mt-1">
                     {product.category}
                   </p>
 
-                  <p className="mt-3 text-lg font-bold text-red-600">
+                  <p className="mt-2 text-lg font-bold text-red-600">
                     ₹{product.price}
                   </p>
 
-                  {/* ==========================
-                      CART CONTROLS
-                      ========================== */}
+                  {/* Cart Controls */}
                   {qty === 0 ? (
                     <button
                       onClick={() => addToCart(product)}
-                      className="btn-primary mt-4 w-full"
+                      className="btn-primary mt-3 w-full py-2.5"
                     >
                       Add to Cart
                     </button>
                   ) : (
-                    <div className="flex items-center justify-between mt-4">
+                    <div className="flex items-center justify-between mt-3">
                       <button
                         onClick={() => decreaseQty(product.id)}
-                        className="px-4 py-1 bg-gray-200 rounded"
+                        className="px-5 py-2 bg-gray-200 rounded-lg text-lg"
                       >
                         −
                       </button>
 
-                      <span className="font-semibold">
+                      <span className="font-semibold text-lg">
                         {qty}
                       </span>
 
                       <button
                         onClick={() => increaseQty(product.id)}
-                        className="px-4 py-1 bg-gray-200 rounded"
+                        className="px-5 py-2 bg-gray-200 rounded-lg text-lg"
                       >
                         +
                       </button>
@@ -145,16 +182,14 @@ function Products() {
 
           {filteredProducts.length === 0 && (
             <p className="text-gray-600">
-              No products found in this category.
+              No products found.
             </p>
           )}
-
         </div>
-
       </div>
+
       <StickyCartBar />
     </section>
-    
   );
 }
 

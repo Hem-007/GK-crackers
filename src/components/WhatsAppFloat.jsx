@@ -9,7 +9,7 @@ FLOATING WHATSAPP BUTTON
 function WhatsAppFloat() {
   return (
     <a
-      href="https://wa.me/9940861382"
+      href="https://wa.me/919940861382"
       target="_blank"
       rel="noopener noreferrer"
       className="
