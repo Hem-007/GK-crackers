@@ -44,7 +44,7 @@ function Home() {
                 {/* Heading */}
                 <h1 className="text-2xl font-extrabold text-gray-800 leading-tight">
                 Celebrate with{" "}
-                <span className="text-red-600">EG Crackers</span>
+                <span className="text-red-600">GK Crackers</span>
                 </h1>
 
 
@@ -171,7 +171,7 @@ function Home() {
         <div className="max-w-7xl mx-auto px-6">
 
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 text-center">
-            Why Choose EG Crackers 🎆✨
+            Why Choose GK Crackers 🎆✨
           </h2>
 
           <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

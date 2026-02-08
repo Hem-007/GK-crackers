@@ -17,7 +17,7 @@ function Navbar() {
       <nav className="hidden md:block bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold text-red-600">
-            EG Crackers
+            GK Crackers
           </h1>
 
           <div className="space-x-6 text-gray-700 font-medium">
