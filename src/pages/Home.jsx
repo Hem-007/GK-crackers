@@ -4,10 +4,13 @@ import { useNavigate } from "react-router-dom";
 import BannerSlider from "../components/BannerSlider";
 import HorizontalProductSection from "../components/HorizontalProductSection";
 import categories from "../data/categories";
-import { bestSellers, limitedSales } from "../data/homeSections";
 import TrustMessage from "../components/TrustMessage";
 import StickyCartBar from "../components/StickyCartBar";
 import SearchBar from "../components/SearchBar";
+import BrandSection from "../components/BrandSection";
+import { TypeAnimation } from "react-type-animation";
+import logoIcon from "../assets/logo/primaryLogo.png";
+
 
 
 /*
@@ -35,36 +38,77 @@ function Home() {
   return (
     <main className="w-full">
 
-      {/* =====================================================
-    HERO SECTION (MOBILE-FIRST, FIXED)
-        ===================================================== */}
-        <section className="w-full bg-[#FFF7ED]">
-            <div className="max-w-7xl mx-auto px-4 pt-6 pb-4">
+      <section className="w-full bg-[#FFF7ED]">
+  <div className="max-w-7xl mx-auto px-4 py-6">
 
-                {/* Heading */}
-                <h1 className="text-2xl font-extrabold text-gray-800 leading-tight">
-                Celebrate with{" "}
-                <span className="text-red-600">GK Crackers</span>
-                </h1>
+    <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+
+      {/* LEFT - LOGO */}
+      <div className="flex items-center justify-between md:justify-start md:w-1/3">
+
+        <img
+          src={logoIcon}
+          alt="GK Crackers Logo"
+          className="h-10 sm:h-12 object-contain"
+        />
+
+        {/* Animation visible on mobile next to logo */}
+        <div className="md:hidden text-violet-900 font-semibold text-sm ml-3">
+          <TypeAnimation
+            sequence={[
+              "Premium Sivakasi Crackers 🎆",
+              2000,
+              "Safe • Reliable • Trusted",
+              2000,
+              "Bulk Orders Available 📦",
+              2000,
+            ]}
+            speed={50}
+            repeat={Infinity}
+          />
+        </div>
+
+      </div>
+
+      {/* CENTER - Animation for Desktop */}
+      <div className="hidden md:flex md:w-1/3 justify-center text-violet-900 font-semibold text-lg">
+        <TypeAnimation
+          sequence={[
+            "Premium Sivakasi Crackers 🎆",
+            2000,
+            "Safe • Reliable • Trusted",
+            2000,
+            "Bulk Orders Available 📦",
+            2000,
+          ]}
+          speed={50}
+          repeat={Infinity}
+        />
+      </div>
+
+      {/* RIGHT - OFFER */}
+      <div className="flex justify-center md:justify-end md:w-1/3 mt-3 md:mt-0">
+        <div className="
+          bg-gradient-to-r from-red-600 via-orange-500 to-yellow-500
+          text-white
+          px-5 py-2
+          rounded-full
+          shadow-md
+          text-xs sm:text-sm
+          font-bold
+          tracking-wide
+        ">
+          🔥 UP TO 40% FESTIVAL DISCOUNT 🔥
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
 
 
-                {/* Description */}
-                <p className="mt-3 text-sm text-gray-700 max-w-xl">
-                Premium quality crackers for every celebration.
-                <span className="hidden sm:inline">
-                    {" "}Safe, reliable & joyful moments 🎆
-                </span>
-                </p>
 
-                {/* Trust message */}
-                <div className="mt-2">
-                <TrustMessage />
-                </div>
-
-                
-
-            </div>
-        </section>
         <section className="px-4 py-4">
             <SearchBar
                 value={search}
@@ -125,6 +169,8 @@ function Home() {
                     hover:-translate-y-1
                     hover:shadow-xl
                     rounded-xl p-4  justify-center
+
+
                   "
                   
                 >
@@ -153,16 +199,20 @@ function Home() {
           ===================================================== */}
       <HorizontalProductSection
         title="🔥 Best Sellers"
-        products={bestSellers}
+        type="best"
       />
+
+
 
       {/* =====================================================
           LIMITED TIME OFFERS
           ===================================================== */}
       <HorizontalProductSection
         title="⏰ Limited Time Offers"
-        products={limitedSales}
+        type="limited"
       />
+
+      <BrandSection />
 
       {/* =====================================================
           WHY CHOOSE US

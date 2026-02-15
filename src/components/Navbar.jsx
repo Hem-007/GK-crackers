@@ -1,5 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { Home as HomeIcon, Package, ShoppingCart } from "lucide-react";
+import logoIcon from "../assets/logo/navbarLogo.png";
+
 
 function Navbar() {
   const location = useLocation();
@@ -16,9 +18,19 @@ function Navbar() {
           ========================= */}
       <nav className="hidden md:block bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <img 
+            src={logoIcon} 
+            alt="Logo"
+            className="h-10 sm:h-12 object-contain"
+          />
           <h1 className="text-2xl font-bold text-red-600">
-            GK Crackers
+            Crackers
           </h1>
+
+          </div>
+           
+          
 
           <div className="space-x-6 text-gray-700 font-medium">
             <Link to="/" className="hover:text-red-600">

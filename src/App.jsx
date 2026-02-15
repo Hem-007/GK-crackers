@@ -7,7 +7,10 @@ import Footer from "./components/Footer";
 import Cart from "./pages/Cart";
 import WhatsAppFloat from "./components/WhatsAppFloat";
 import BackButton from "./components/BackButton";
-
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Terms from "./pages/Terms";
 
 
 
@@ -41,8 +44,12 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />
-            <Route path="/cart" element={<Cart />} />     {/* ✅ CART PAGE */}
-            <Route path="/order" element={<Order />} />   {/* ✅ ORDER PAGE */}
+            <Route path="/cart" element={<Cart />} />     
+            <Route path="/order" element={<Order />} /> 
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<Terms />} />  
         </Routes>
         </div>  
         

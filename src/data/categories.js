@@ -1,41 +1,43 @@
 /*
 =====================================================
 HOME PAGE PRODUCT CATEGORIES DATA
-- Name
-- Image
 =====================================================
 */
 
-import fancy from "../assets/categories/fancy.png";
 import kids from "../assets/categories/kids.png";
-import sound from "../assets/categories/sound.png";
-import flowerpots from "../assets/categories/flowerpots.png";
+import wheels from "../assets/categories/wheels.png";
 import sparklers from "../assets/categories/sparklers.png";
-import chakkars from "../assets/categories/chakkars.png";
+import flowerpots from "../assets/categories/flowerpots.png";
 import rockets from "../assets/categories/rockets.png";
-import giftbox from "../assets/categories/giftbox.png";
-import night from "../assets/categories/night.png";
-import day from "../assets/categories/day.png";
-import sky from "../assets/categories/sky.png";
+import fancy from "../assets/categories/fancy.png";
+import smoke from "../assets/categories/smoke.png";
+import mega from "../assets/categories/mega.png";
+import giant from "../assets/categories/giant.png";
+import bombs from "../assets/categories/bombs.png";
+import toy from "../assets/categories/toy.png";
 import ground from "../assets/categories/ground.png";
-import hand from "../assets/categories/hand.png";
-import colorful from "../assets/categories/colorful.png";
+import sky from "../assets/categories/sky.png";
+import bijili from "../assets/categories/bijili.png";
+import sound from "../assets/categories/sound.png";
+import twinkling from "../assets/categories/twinkling.png";
 
 const categories = [
-  { name: "Fancy Crackers", image: fancy },
   { name: "Kids Crackers", image: kids },
-  { name: "Sound Crackers", image: sound },
-  { name: "Flower Pots", image: flowerpots },
+  { name: "Spinners & Wheels", image: wheels },
   { name: "Sparklers", image: sparklers },
-  { name: "Chakkars", image: chakkars },
+  { name: "Flower Pots", image: flowerpots },
   { name: "Rockets", image: rockets },
-  { name: "Gift Boxes", image: giftbox },
-  { name: "Night Time", image: night },
-  { name: "Day Time", image: day },
+  { name: "Fancy Items", image: fancy },
+  { name: "Smoke & Colour Effects", image: smoke },
+  { name: "Mega Packs", image: mega },
+  { name: "Giant Crackers", image: giant },
+  { name: "Bombs", image: bombs },
+  { name: "Toy Crackers", image: toy },
+  { name: "Ground Chakkar", image: ground },
   { name: "Sky Shots", image: sky },
-  { name: "Ground Shots", image: ground },
-  { name: "Hand Crackers", image: hand },
-  { name: "Colorful Crackers", image: colorful },
+  { name: "Bijili Crackers", image: bijili },
+  { name: "Sound Crackers", image: sound },
+  { name: "Twinkling Stars", image: twinkling },
 ];
 
 export default categories;

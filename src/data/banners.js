@@ -3,9 +3,9 @@
 // You can add/remove images here anytime
 // ========================================
 
-import banner1 from "../assets/banners/banner_1.jpg";
+import banner1 from "../assets/banners/banner_1.png";
 import banner2 from "../assets/banners/banner_2.png";
-// import banner3 from "../assets/banners/banner_1.jpg";
+import banner3 from "../assets/banners/banner_3.png";
 
 const banners = [
   {
@@ -16,13 +16,13 @@ const banners = [
   {
     id: 2,
     image: banner2,
-    alt: "EG Crackers Advertisement Banner",
+    alt: "GK Crackers Advertisement Banner",
   },
-  // {
-  //   id: 3,
-  //   image: banner3,
-  //   alt: "Diwali Special Crackers",
-  // },
+  {
+    id: 3,
+    image: banner3,
+    alt: "GK Crackers Advertisement Banner_2",
+  },
 ];
 
 export default banners;

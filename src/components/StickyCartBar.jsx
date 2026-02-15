@@ -18,7 +18,7 @@ function StickyCartBar() {
   // Calculate total quantity & amount
   const totalQty = cartItems.reduce((sum, i) => sum + i.qty, 0);
   const totalAmount = cartItems.reduce(
-    (sum, i) => sum + i.price * i.qty,
+    (sum, i) => sum + i.originalPrice * i.qty,
     0
   );
 
