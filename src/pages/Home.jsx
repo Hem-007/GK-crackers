@@ -98,7 +98,7 @@ function Home() {
           font-bold
           tracking-wide
         ">
-          🔥 UP TO 40% FESTIVAL DISCOUNT 🔥
+           UP TO 40% FESTIVAL DISCOUNT 
         </div>
       </div>
 
